@@ -22,7 +22,7 @@ def handler(event, context):
         status_res_json = status_res.json()
     except requests.exceptions.RequestException as e:
         return {
-            'statusCode': 200,
+            'statusCode': 500,
             'body': json.dumps({'message': "A network error occurred while getting the Server state."})}
 
     if "instanceList" in status_res_json and len(status_res_json["instanceList"]) == 1 and "operationStatus" in \
@@ -43,12 +43,12 @@ def handler(event, context):
                 start_res_json = start_res.json()
             except requests.exceptions.RequestException as e:
                 return {
-                    'statusCode': 200,
+                    'statusCode': 500,
                     'body': json.dumps({'message': "A network error occurred while starting the server."})}
 
             if "errors" in start_res_json:
                 return {
-                    'statusCode': 200,
+                    'statusCode': 500,
                     'body': json.dumps({'message': ("An exception occurred while starting the server. "
                                                     "Please try again later.")})}
             else:
