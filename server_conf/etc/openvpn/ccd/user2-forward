@@ -1,0 +1,2 @@
+push "redirect-gateway def1"
+# forward all internet traffic
